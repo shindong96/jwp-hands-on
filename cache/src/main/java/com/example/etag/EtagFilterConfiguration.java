@@ -1,12 +1,11 @@
 package com.example.etag;
 
+import com.example.version.ResourceVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
-
-import com.example.version.ResourceVersion;
 
 @Configuration
 public class EtagFilterConfiguration {
@@ -17,8 +16,8 @@ public class EtagFilterConfiguration {
     @Bean
     public FilterRegistrationBean<ShallowEtagHeaderFilter> shallowEtagHeaderFilter() {
         FilterRegistrationBean<ShallowEtagHeaderFilter> filterRegistrationBean
-            = new FilterRegistrationBean<>(new ShallowEtagHeaderFilter());
-        filterRegistrationBean.addUrlPatterns("/etag", "/resources/" + resourceVersion.getVersion() + "/js/index.js");
+                = new FilterRegistrationBean<>(new ShallowEtagHeaderFilter());
+        filterRegistrationBean.addUrlPatterns("/etag", "/resources/" + resourceVersion.getVersion() + "/*");
         return filterRegistrationBean;
     }
 }
